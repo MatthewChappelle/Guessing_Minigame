@@ -4,47 +4,47 @@ let questions = [
     {
     numb: 1,
     question: "What does HTML stand for?",
-    answer: "Hyper Text Markup Language",
     options: [
-      "Hyper Text Mobile Language",
-      "Hyper Text Markup Language",
-      "Hyper Text Multiplex Language",
-      "Hyper Text Marginal Language"
+     {text: "Hyper Text Mobile Language", correct: false},
+     {text: "Hyper Text Markup Language", correct: true},
+     {text: "Hyper Text Multiplex Language", correct: false},
+     {text: "Hyper Text Marginal Language", correct: false}
+
     ]
   },
+
     {
     numb: 2,
     question: "What does CSS stand for?",
-    answer: "Cascading Style Sheet",
     options: [
-      "Common Style Sheet",
-      "Colored Style Sheet",
-      "Computer Style Sheet",
-      "Cascading Style Sheet"
+      {text: "Common Style Sheet", correct: false},
+      {text: "Colored Style Sheet", correct: false},
+      {text: "Computer Style Sheet", correct: false},
+      {text: "Cascading Style Sheet", correct: true}
     ]
   },
+  
     {
     numb: 3,
     question: "What does PHP stand for?",
-    answer: "Hypertext Preprocessor",
     options: [
-      "Hypertext Preprocessor",
-      "Hypertext Program",
-      "Hypertext Preprogram",
-      "Hypertext Propogation"
+      {text: "Hypertext Preprocessor", correct: true},
+      {text: "Hypertext Program", correct: false},
+      {text: "Hypertext Preprogram", correct: false},
+      {text: "Hypertext Propogation", correct: false}
     ]
   },
+
     {
     numb: 4,
     question: "What does SQL stand for?",
-    answer: "Structured Query Language",
     options: [
-      "Stylish Question Language",
-      "Stylesheet Query Language",
-      "Statement Question Language",
-      "Structured Query Language"
+      {text: "Stylish Question Language", correct: false},
+      {text: "Stylesheet Query Language", correct: false},
+      {text: "Statement Question Language", correct: false},
+      {text: "Structured Query Language", correct: true}
     ]
-  },
+  }
 
   //   {
   //   numb: x,
