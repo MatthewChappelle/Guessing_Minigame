@@ -1,125 +1,185 @@
-var startBtn = document.getElementById('start-btn')
-var submitBtn = document.getElementById('submit-btn')
-var nextBtn = document.getElementById('next-btn')
-var questionContainerEl = document.getElementById('question-container')
-var questionEl = document.getElementById('question')
-var answerButtonsEl = document.getElementById('answers')
-var ansBtn = document.getElementById('btn')
-var tempBtn = document.getElementsByClassName('tempBtn')
-var usernameForm = document.getElementById('username-form')
-var usernameInput = document.getElementById('username-input')
-var scoreSave = document.getElementById('score-save')
-var results = document.getElementById('results')
-let shuffledQuestions, currentQuestionIndex
-let currentScore = 0
+var startBtn = document.getElementById('start-btn');
+var submitBtn = document.getElementById('submit-btn');
+var nextBtn = document.getElementById('next-btn');
+var questionContainerEl = document.getElementById('question-container');
+var questionEl = document.getElementById('question');
+var answerButtonsEl = document.getElementById('answers');
+var ansBtn = document.getElementById('btn');
+var tempBtn = document.getElementsByClassName('tempBtn');
+var usernameForm = document.getElementById('username-form');
+var usernameInput = document.getElementById('username-input');
+var scoreSave = document.getElementById('score-save');
+var results = document.getElementById('results');
+var timer = document.getElementById('timer');
+let shuffledQuestions, currentQuestionIndex;
+var currentScore = 0;
+var timeRemaining = 60;
+let originalTime = timeRemaining;
+var time;
 
+// starts timer
+function startTimer() {
+  timeRemaining;
+  time = setInterval(() => {
+    timeRemaining--;
+    timer.innerHTML = timeRemaining + " seconds left";
+    if (timeRemaining == 0) {
+      clearInterval(time);
+      alert("Time's Up!")
+      gameOver();
+    }
+  }, 1000)
+}
 
+// shows finals score
+function pauseTimer() {
+  clearInterval(time)
+  timer.innerHTML = currentScore + " /4";
+}
+
+// resets for next quiz
+function resetTimer() {
+  clearInterval(time);
+  timeRemaining = originalTime;
+  startTimer();
+}
+
+// starts quiz
 startBtn.addEventListener('click', startQuiz);
+
+// opens form for user entry
 submitBtn.addEventListener('click', openForm);
+
 nextBtn.addEventListener('click', () => {
-    currentQuestionIndex++
-    nextQuestion() 
-})
+  currentQuestionIndex++;
+  nextQuestion();
+  console.log(currentScore);
+});
 
 
 function startQuiz() {
-    usernameForm.classList.add('hide');
-    startBtn.classList.add('hide');
-    submitBtn.classList.add('hide');
-    shuffledQuestions = questions.sort(() => Math.random() - .5)
-    //randomizes questions
-    currentQuestionIndex = 0
-    questionContainerEl.classList.remove('hide')
-    nextQuestion()
-}
+  currentScore = 0
+  usernameForm.classList.add('hide');
+  startBtn.classList.add('hide');
+  submitBtn.classList.add('hide');
+  shuffledQuestions = questions.sort(() => Math.random() - .5);
+  //randomizes questions
+  currentQuestionIndex = 0;
+  questionContainerEl.classList.remove('hide');
+  resetTimer();
+  nextQuestion();
+};
 
+// shuffles and displays next fresh question
 function nextQuestion() {
-  resetState()
-  showQuestion(shuffledQuestions[currentQuestionIndex])
-}
+  resetState();
+  showQuestion(shuffledQuestions[currentQuestionIndex]);
+};
 
 
 //reuses buttons, but changes text and correct answers
 function showQuestion(question) {
-  questionEl.innerText = question.question
+  questionEl.innerText = question.question;
   question.answers.forEach(answer => {
-    const button = document.createElement('button')
-    button.innerText = answer.text
-    button.classList.add('tempBtn')
+    const button = document.createElement('button');
+    button.innerText = answer.text;
+    button.classList.add('tempBtn');
     if (answer.correct) {
-      button.dataset.correct = answer.correct
-          }
-    button.addEventListener('click', selectAnswer)
-    answerButtonsEl.appendChild(button)
-  })
+      button.dataset.correct = answer.correct;
+    };
+    button.addEventListener('click', selectAnswer);
+    answerButtonsEl.appendChild(button);
+  });
 }
 //resets right and wrong colors
 function resetState() {
-  clearStatusClass(document.body)
-  nextBtn.classList.add('hide')
+  clearStatusClass(document.body);
+  nextBtn.classList.add('hide');
   while (answerButtonsEl.firstChild) {
-    answerButtonsEl.removeChild(answerButtonsEl.firstChild)
-  }
+    answerButtonsEl.removeChild(answerButtonsEl.firstChild);
+  };
+};
+
+// stops quiz
+function gameOver() {
+  startBtn.classList.remove('hide');
+  submitBtn.classList.remove('hide');
+  startBtn.innerText = 'Restart Quiz!';
+  pauseTimer();
 }
 
+// when answer is chosen display correct or incorrect and end if last question
 function selectAnswer(e) {
-  const selectedBtn = e.target
-  const correct = selectedBtn.dataset.correct
-  
-//   if correct
-//   currentScore++
-//       results.textContent = currentScore;
-  
-  setStatusClass(document.body, correct)
+  const selectedBtn = e.target;
+  const correct = selectedBtn.dataset.correct;
+
+  setStatusClass(document.body, correct);
+
   Array.from(answerButtonsEl.children).forEach(button => {
-    setStatusClass(button, button.dataset.correct)
-  })
+    setStatusClass(button, button.dataset.correct);
+  });
+
   document.querySelectorAll('.tempBtn').forEach(btn => {
     btn.disabled = true;
-  });
+  });;
+
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
-    nextBtn.classList.remove('hide')
+    nextBtn.classList.remove('hide');
   } else {
     //only happens after all questions have been cycled through
-    startBtn.classList.remove('hide')
-    submitBtn.classList.remove('hide');
-    startBtn.innerText = 'Restart Quiz!'
+    gameOver();
+  };
+
+  //increment current scoreboard
+  if (selectedBtn.classList.contains('correct')) {
+    currentScore++;
+  };
+
+  if (selectedBtn.classList.contains('wrong')) {
+    timeRemaining = timeRemaining - 10;
   }
 }
 
+
 function openForm() {
- usernameForm.classList.remove('hide');
-}
+  usernameForm.classList.remove('hide');
+};
 
 //saves final score to local storage
-scoreSave.addEventListener("click", function(event) {
-    event.preventDefault();
+scoreSave.addEventListener("click", function (event) {
+  event.preventDefault();
   // create user object from user input submission
+  let userName = usernameInput.value;
+  let score = currentScore + "/4";
+  let timeLeft = timeRemaining + "/60 sec";
 
-  var userName = usernameInput.value
-  var score = "1"
-  var user = [userName, score]
+
+  //make new key for each submission and sort by highest score
+  let key = Date.now();
+
+  let highscore = { userName, score, timeLeft };
   // set new values to local storage 
-  localStorage.setItem("Scoreboard", JSON.stringify(user));
-usernameForm.classList.add('hide');
-submitBtn.classList.add('hide');
+  localStorage.setItem(key, JSON.stringify(highscore));
+  usernameForm.classList.add('hide');
+  submitBtn.classList.add('hide');
+  console.log(highscore)
 });
 
 
 //changes right/wrong colors
 function setStatusClass(element, correct) {
-  clearStatusClass(element)
+  clearStatusClass(element);
   if (correct) {
-    element.classList.add('correct')
+    element.classList.add('correct');
   } else {
-    element.classList.add('wrong')
-  }
-}
+    element.classList.add('wrong');
+  };
+};
 
 //resets right and wrong colors
 function clearStatusClass(element) {
-  element.classList.remove('correct')
-  element.classList.remove('wrong')
+  element.classList.remove('correct');
+  element.classList.remove('wrong');
 }
 
 
@@ -162,14 +222,4 @@ const questions = [
       { text: "Structured Query Language", correct: true }
     ]
   }
-]
-
-// submitScoreButton.addEventListener("click", function(event) {
-//   event.preventDefault();
-//   // create user object from user input submission
-//   var user = {
-//     userName: usernameInput.value.trim()
-//   };
-//   // set new values to local storage 
-//   localStorage.setItem("user", JSON.stringify(user));
-// });
+];

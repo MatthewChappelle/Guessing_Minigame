@@ -37,6 +37,11 @@
     padding: 10px;
     box-shadow: 0 0 10px 2px;
   }
+
+  #headings {
+    display: flex;
+    justify-content: space-between;
+  }
   
   .btn-grid {
     display: grid;
@@ -60,9 +65,10 @@
     border: 1px solid hsl(var(--hue), 100%, 30%);
     background-color: hsl(var(--hue), 100%, 50%);
     border-radius: 5px;
-    padding: 5px 10px;
+    padding: 10px 10px;
     color: white;
     outline: none;
+    font-size: large;
   }
   
   .tempBtn:hover {
@@ -79,7 +85,14 @@
     --hue: var(--hue-wrong);
   }
   
-  .start-btn, .next-btn .submit-btn{
+  .start-btn, .next-btn .submit-btn {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 20px;
+  }
+
+  .submit-btn, .next-btn {
+    min-width: 12vh;
     font-size: 1.5rem;
     font-weight: bold;
     padding: 10px 20px;
@@ -95,3 +108,18 @@
     display: none;
   }
   
+  #question {
+padding:  6px;
+font-size: x-large;
+  }
+
+  #timer {
+
+  border-style: solid;
+  padding:  3px;
+  }
+
+  #username-form {
+    justify-content: center;
+    padding: 3px;
+  }

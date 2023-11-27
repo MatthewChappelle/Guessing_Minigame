@@ -10,8 +10,11 @@
 <body id="body">
   <div class="container">
     <div id="question-container" class="hide">
-        <div id="results"></div>
-      <div id="question">Question</div>
+      <div id="results"></div>
+      <div id="headings">
+      <div id="question"></div>
+      <div id="timer"></div>
+    </div>
       <div id="answers" class="btn-grid">
         <button id="ans" class="btn">Answer 1</button>
         <button id="ans" class="btn">Answer 2</button>
@@ -23,13 +26,14 @@
       <!-- start button goes away after clicking -->
       <button id="start-btn" class="start-btn btn">Start 60 second, 4 Question Quiz!</button>
       <button id="submit-btn" class="submit-btn btn hide">Submit your score!</button>
-      <!-- <button id="score-Submit-Btn" ></button> -->
+      <!-- nav button does not show up until answer is chosen or timer is finished -->
       <button id="next-btn" class="next-btn btn hide">Next</button>
     </div>
     <form id="username-form" class="hide">
-        <label>Username:</label>
+        <label>Username:
         <input type="text" id="username-input" placeholder="Enter your name" required>
         <button type="submit" id="score-save">Submit</button>
+      </label>
     </form>
     <script defer src="./assets/js/script.js"></script>
   </div>
