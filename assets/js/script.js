@@ -221,5 +221,23 @@ const questions = [
       { text: "Statement Question Language", correct: false },
       { text: "Structured Query Language", correct: true }
     ]
+  },
+  {
+    question: "What does MERN stand for?",
+    answers: [
+      { text: "MongoDB Express React Node", correct: true },
+      { text: "Multiple Entery Reactive Nesting", correct: false },
+      { text: "Mongoose Enlighten REST Node", correct: false },
+      { text: "Moving Every Reception Now", correct: false }
+    ]
+  },
+  {
+    question: "What is React?",
+    answers: [
+      { text: "A method of coding (build first fix later)", correct: false },
+      { text: "Learning by studying only what you don't know", correct: false },
+      { text: "A language that learns with AI", correct: false },
+      { text: "A JavaScript Library specifically for UI", correct: true }
+    ]
   }
 ];
