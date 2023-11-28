@@ -1,6 +1,12 @@
 # Guessing_Minigame
 Quiz game built for UCI Bootcamp
 
+<p>User Story:<br>
+AS A coding boot camp student<br>
+I WANT to take a timed quiz on JavaScript fundamentals that stores high scores<br>
+SO THAT I can gauge my progress compared to my peers<br>
+
+
 <p>Acceptance Criteria:<br>
 GIVEN I am taking a code quiz<br>
 WHEN I click the start button<br>
@@ -17,7 +23,13 @@ THEN I can save my initials and score</p>
 
 ![quiz in action](assets/image/screenshot.png)
 
+
 In this quiz game the user is given mulitple choices to a single question multiple times within one minute. <br>
-The user will be able to submit their score and remaining time to local storage when the quiz is completed or if the timer runs out.
+The user will be able to submit their score and remaining time to local storage when the quiz is completed or if the timer runs out.<br>
+
+
+
+![Saving in local storage](assets/image/localStorage.png)
+
 
 <a href="https://matthewchappelle.github.io/Guessing_Minigame/">Check it out here!</a>

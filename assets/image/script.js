@@ -34,7 +34,7 @@ function startTimer() {
 // shows finals score
 function pauseTimer() {
   clearInterval(time)
-  timer.innerHTML = currentScore + " /4";
+  timer.innerHTML = currentScore + 1 + " /6";
 }
 
 // resets for next quiz
@@ -150,7 +150,7 @@ scoreSave.addEventListener("click", function (event) {
   event.preventDefault();
   // create user object from user input submission
   let userName = usernameInput.value;
-  let score = currentScore + "/4";
+  let score = currentScore + "/6";
   let timeLeft = timeRemaining + "/60 sec";
 
 
